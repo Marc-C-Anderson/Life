@@ -46,7 +46,7 @@ const createUniverse = (maxCols, maxRows) => {
     const row = 3 * maxCols
     const cell = !!(i >= row + 6 && i <= row + 8)
     const cell2 = Math.random() >= 0.5
-    universe.push(cell2)
+    universe.push(cell)
   }
   return universe
 }
@@ -113,7 +113,7 @@ const game = () => {
   let start = 0
   const step2 = (timestamp) => {
     const elapsed = timestamp - start
-    if (elapsed > 200) {
+    if (elapsed > 500) {
       start = timestamp
       universe = play(MAX_COLS, MAX_ROWS, table, universe, 1)
     }
@@ -122,4 +122,4 @@ const game = () => {
   window.requestAnimationFrame(step2)
 }
 
-// game()
+/* game() */
