@@ -61,6 +61,18 @@ Rules
 */
 const step = (maxCols, universe) => {
   const newUniverse = []
+  for (let row = 0; row < MAX_ROWS; row++) {
+    for (let col = 0; col < MAX_COLS; col++) {
+      const idx = row * MAX_COLS + col
+      const cell = universe[idx]
+      newUniverse.push(!cell)
+    }
+  }
+  return newUniverse
+}
+
+const stepx = (maxCols, universe) => {
+  const newUniverse = []
   for (let idx = 0; idx < universe.length; idx++) {
     const l = idx - 1
     const r = idx + 1
@@ -106,7 +118,7 @@ const play = (maxCols, maxRows, table, universe, iterations) => {
   return newUniverse
 }
 
-const game = () => {
+const life = () => {
   const table = createDisplay(MAX_COLS, MAX_ROWS)
   let universe = createUniverse(MAX_COLS, MAX_ROWS)
   updateDisplay(MAX_COLS, MAX_ROWS, table, universe)
@@ -121,5 +133,3 @@ const game = () => {
   }
   window.requestAnimationFrame(step2)
 }
-
-/* game() */
