@@ -8,8 +8,8 @@ Rules
 4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 */
 
-const MAX_ROWS = 8
-const MAX_COLS = 16
+const MAX_COLS = 64
+const MAX_ROWS = 32
 
 const universe = new Array(MAX_COLS * MAX_ROWS)
 
@@ -27,20 +27,30 @@ const createDisplay = () => {
 }
 
 const createIndex = (col, row) => {
-  if (row === MAX_ROWS) {
-    console.log(row)
-    return 0 * MAX_COLS + col
+  if (col < 0 && row < 0) {
+    return MAX_COLS * MAX_ROWS - 1
+  } else if (col < 0) {
+    return row * MAX_COLS + MAX_COLS - 1
+  } else if (row < 0) {
+    return (MAX_ROWS - 1) * MAX_COLS + col
+  } else if (col === MAX_COLS && row === MAX_ROWS) {
+    return 0
+  } else if (col === MAX_COLS) {
+    return row * MAX_COLS
+  } else if (row === MAX_ROWS) {
+    return col
+  } else {
+    return row * MAX_COLS + col
   }
-  return row * MAX_COLS + col
 }
 
 const createUniverse = () => {
   universe.fill(false)
-  universe[createIndex(2, 1)] = true
-  universe[createIndex(3, 2)] = true
-  universe[createIndex(1, 3)] = true
-  universe[createIndex(2, 3)] = true
-  universe[createIndex(3, 3)] = true
+  universe[createIndex(4, 0)] = true
+  universe[createIndex(6, 1)] = true
+  universe[createIndex(4, 2)] = true
+  universe[createIndex(5, 2)] = true
+  universe[createIndex(6, 2)] = true
 }
 
 const updateDisplay = () => {
@@ -96,7 +106,7 @@ const life = () => {
   createUniverse()
   let start = 0
   const step = (now) => {
-    if (now - start > 400) {
+    if (now - start > 200) {
       start = now
       updateDisplay()
       updateUniverse()

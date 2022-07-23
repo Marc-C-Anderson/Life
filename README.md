@@ -1,5 +1,11 @@
 # Life #
 
+## The World ##
+
+The world is the same as the CHIP-8 Graphics resolution which is 64 * 32 pixels.
+
+## Conway's Rules ##
+
 Rules
 1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
 1. Any live cell with two or three live neighbours lives on to the next generation.
